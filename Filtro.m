@@ -1,4 +1,4 @@
-function [ ] = Filtro(fileIn,fCut,varargin)
+function [b a] = Filtro(fileIn,fCut,varargin)
 %%Filtro Butter pasa Bajas. 3 Argumentos.
 %Primer Argumento, archivo de entrada '*.wav'
 %Segundo Argumento, Frecuencia de corte (4000 para voz, por ejemplo)
@@ -16,8 +16,9 @@ function [ ] = Filtro(fileIn,fCut,varargin)
 fileOut = [fileIn '_f.wav'];
 fileIn = [fileIn,'.wav'];
 [y,Fs] = audioread(fileIn);
-fNorm = fCut/Fs;
-[b,a]=butter(20,fNorm,'low');
+fNorm = fCut/(Fs*0.5);
+disp(fNorm);
+[b,a]=butter(2,fNorm,'low');
 y2 = filter(b,a,y);
 audiowrite(fileOut,y2,Fs);
 if(nargin>2)
@@ -25,10 +26,10 @@ if(nargin>2)
         case 3
             if(varargin{1}==1)
                 subplot(2,1,1),plot(y), grid on, title(strcat('Archivo Original: ',fileIn))      
-                subplot(2,1,2),plot(y), grid on, title(strcat('Archivo Filtrado: ',fileOut));                 
+                subplot(2,1,2),plot(y2), grid on, title(strcat('Archivo Filtrado: ',fileOut));                 
             elseif(varargin{1}==2)
                 subplot(2,1,1),plot(y), grid on, title(strcat('Archivo Original: ',fileIn))      
-                subplot(2,1,2),plot(y), grid on, title(strcat('Archivo Filtrado: ',fileOut));
+                subplot(2,1,2),plot(y2), grid on, title(strcat('Archivo Filtrado: ',fileOut));
                 sound(y,Fs);
                 pause(2);
                 sound(y2,Fs);
@@ -36,7 +37,7 @@ if(nargin>2)
         case 4
             if(varargin{1}==1)
                 subplot(2,1,1),plot(y), grid on, title(strcat('Archivo Original: ',fileIn))      
-                subplot(2,1,2),plot(y), grid on, title(strcat('Archivo Filtrado: ',fileOut));   
+                subplot(2,1,2),plot(y2), grid on, title(strcat('Archivo Filtrado: ',fileOut));   
             end
             if(varargin{2}==1)
                 sound(y,Fs);

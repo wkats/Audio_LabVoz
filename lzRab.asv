@@ -1,0 +1,8 @@
+function [lz] = lzRab(Zn,umbCru,le)
+lz=le;
+for n=le:-1:le-25
+    if(Zn(n)==umbCru)
+    end
+end
+
+end
