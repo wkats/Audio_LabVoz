@@ -9,5 +9,4 @@ for n=0:1:nTramas-1
     end
 end
 Zer = Zer/(2*nTramas);
-Min=min(Zer);
 end

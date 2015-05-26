@@ -16,8 +16,7 @@ function [b a] = Filtro(fileIn,fCut,varargin)
 fileOut = [fileIn '_f.wav'];
 fileIn = [fileIn,'.wav'];
 [y,Fs] = audioread(fileIn);
-fNorm = fCut/(Fs*0.5);
-disp(fNorm);
+fNorm = fCut/Fs;
 [b,a]=butter(2,fNorm,'low');
 y2 = filter(b,a,y);
 audiowrite(fileOut,y2,Fs);

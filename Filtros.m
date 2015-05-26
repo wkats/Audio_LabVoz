@@ -81,6 +81,15 @@ function selecciona_Callback(hObject, eventdata, handles)
 [file path] = uigetfile('*.wav','/');
 disp(file)
 disp(path)
+[y,Fs]=audioread(strcat(path,file));
+axes(handles.axes1);
+%[b,a]=butter(10,0.5,'low');
+%y2=filter(b,a,y);
+%plot(sin(1:1:100));
+plot(y);
+axes(handles.axes2);
+plot(abs(fft(y)));
+
 
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.

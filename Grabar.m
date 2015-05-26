@@ -15,7 +15,7 @@ for itActual = 1:1:itNum
   disp('Grabación Concluida :P');
   play(recorder);
   audioData = getaudiodata(recorder,'double');  
-  exitName = strcat(fileName,'-',num2str(itActual),'.wav'); 
+  exitName = strcat(fileName,num2str(itActual),'.wav'); 
   audiowrite(exitName,audioData,Fs);
   plot(audioData);
 end
