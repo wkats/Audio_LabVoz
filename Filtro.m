@@ -1,4 +1,4 @@
-function [b a] = Filtro(fileIn,fCut,varargin)
+function [] = Filtro(fileIn,fCut,varargin)
 %%Filtro Butter pasa Bajas. 3 Argumentos.
 %Primer Argumento, archivo de entrada '*.wav'
 %Segundo Argumento, Frecuencia de corte (4000 para voz, por ejemplo)
@@ -16,7 +16,7 @@ function [b a] = Filtro(fileIn,fCut,varargin)
 fileOut = [fileIn '_f.wav'];
 fileIn = [fileIn,'.wav'];
 [y,Fs] = audioread(fileIn);
-fNorm = fCut/Fs;
+fNorm = fCut/(Fs*0.5);
 [b,a]=butter(2,fNorm,'low');
 y2 = filter(b,a,y);
 audiowrite(fileOut,y2,Fs);
